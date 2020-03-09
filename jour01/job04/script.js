@@ -1,7 +1,8 @@
-Number.prototype.isBissextile=function(){
-return (new Date(this,2,0).getDate()>=29 )
+function IsBissextile(annee)
+{
+if ((annee%4==0) && ((annee%100!=0) || (annee%400==0))) return true;
+else return false;
 }
 
 
-var annee=2020
-alert(annee.isBissextile())
+alert(IsBissextile(2020))
