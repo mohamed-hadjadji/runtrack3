@@ -2,12 +2,22 @@
 	display: flex;
 	border:solid;
 	width: 45%;
-	height: 450px;	
+	height: 420px;	
 }
 #rangees{
 	
 	border:solid;
-	height: 450px;
+	height: 420px;
 	width: 45%;
 		
+}
+
+#win{
+	color: green;
+	font-size: 50px;
+}
+
+#loose{
+	color:red;
+	font-size: 50px;
 }
