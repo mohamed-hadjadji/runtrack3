@@ -1,10 +1,11 @@
 $(document).ready(function(){
   
   $("#button").click(function(){
-    $("#arc1").insertAfter($("#arc6"));
-    $("#arc2").insertAfter($("#arc4"));
-    $("#arc3").insertBefore($("#arc1"));
-    $("#arc5").insertAfter($("#arc6"));
+     var parent = $("#melangees");
+    var divs = parent.children();
+    while (divs.length) {
+        parent.append(divs.splice(Math.floor(Math.random() * divs.length), 1)[0]);
+    }
   });
   $("#arc1").click(function(){
     $("#arc1").appendTo("#rangees");
