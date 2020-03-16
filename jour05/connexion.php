@@ -7,8 +7,10 @@
 
 <body>
 
-    <h1>Formulaire de connexion</h1>
+    
 
+<section id="connexion">
+    <h1>Formulaire de connexion</h1>
     <form>
     <p>
         Nom d'utilisateur : <input type="text" id="username" />
@@ -18,5 +20,6 @@
     </form>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+</section>
 </body>
 </html>

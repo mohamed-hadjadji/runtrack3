@@ -1,7 +1,5 @@
 <?php
    session_start();
-
-  include("include/class.php");
   
    ?>
 
@@ -13,6 +11,7 @@
     <meta charset="UTF-8">
     <title> Inscription</title>
     <link rel="stylesheet" href="">
+    
 </head>
 
 <body class="topic">
@@ -26,12 +25,11 @@
     ?>
 
     </header>
-        <div id="resultat">
-      
-    </div>
-        <section id="conteneur">
-        <h1> Inscription </h1>
 
+        <section id="inscription">
+        <h1> Inscription </h1>
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
         <form method='POST' action=''>
            
                 <label>Login</label>
@@ -47,29 +45,45 @@
                 <input id="email" type="text" name='mail'/>
                         
                 <label>Password</label>
-                <input id="password" type="password" name='mdp1' required />
+                <input id="mdp1" type="password" name='mdp1' required />
             
                 <label>Confirmation Password</label>
-                <input type="password" name='mdp2' required />
+                <input id="mdp2" type="password" name='mdp2' required />
             
-            <input id="bouton" type='submit' name='valider' value='Inscription' />
+            <input id="button" type='submit' name='valider' value='Inscription' />
 
            <?php
 
-           $register = new user();
-
-           $login = $_POST['login'];
-           $mdp= password_hash($_POST["mdp1"], PASSWORD_DEFAULT, array('cost' => 12));
-           $nom =$_POST['nom'];
-           $prenom = $_POST['prenom'];       
-           $email=$_POST['mail'];
-           $register->register($login,$nom,$prenom,$email,$mdp);           
+           $connexion = new PDO('mysql:host=localhost;dbname=bigjob', 'root', '');
+        if ($_POST['mdp1']==$_POST['mdp2'])
+            {
+            $reponse = $connexion->query("SELECT* FROM utilisateurs WHERE login='".$_POST['login']."'");
+            $resultat=$reponse->fetchAll();
+            $trouve=false;
+            foreach ($resultat as $key => $value) 
+            {
+            if ($resultat[$key][1]==$_POST['login'])
+            {
+               $trouve=true;
+               echo "<p class='erreur'><b>Login déja existant!!</b></p>";
+            }
+           }
+           if ($trouve==false)
+           {
+            $sql = $connexion->query( "INSERT INTO utilisateurs (login,nom,prenom,email,password)
+                VALUES (:login, :prenom, :nom, :email, :mdp1)");      
+           
+            }
+           }
+           else
+           {
+              echo "<p class='erreur'><b>Les mots de passe doivent être identique!</b></p>";
+           }      
         
     ?> 
 
         </form>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script type="text/javascript" src="script.js"></script>
+        
      </section>
     <?php
     }
